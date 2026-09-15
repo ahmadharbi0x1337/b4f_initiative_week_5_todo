@@ -4,6 +4,12 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>To-Do</title>
+    <!-- Bootstrap -->
+    <link
+      rel="stylesheet"
+      href="/node_modules/bootstrap/dist/css/bootstrap.css"
+    />
+    <!-- Custom CSS -->
     <link
       rel="stylesheet"
       href="/css/style.css
@@ -11,6 +17,216 @@
     />
   </head>
   <body>
+    <!-- Header -->
+    <div class="container-fluid">
+      <!-- Navbar -->
+      <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">Navbar</a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Home</a>
+              </li>
+
+              <li class="nav-item">
+                <a class="nav-link" href="/users.html">Users</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </div>
+
+    <!-- Main -->
+    <div class="container-fluid" id="operations">
+      <!-- Add User/Task  -->
+      <span id="buttons">
+        <span class="add-user">
+          <!-- Button trigger modal -->
+          <button
+            type="button"
+            class="btn btn-primary"
+            data-bs-toggle="modal"
+            data-bs-target="#exampleModal"
+          >
+            Add User
+          </button>
+
+          <!-- Modal -->
+          <div
+            class="modal fade"
+            id="exampleModal"
+            tabindex="-1"
+            aria-labelledby="exampleModalLabel"
+            aria-hidden="true"
+          >
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h1 class="modal-title fs-5" id="exampleModalLabel">
+                    Modal title
+                  </h1>
+                  <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                  ></button>
+                </div>
+                <div class="modal-body">...</div>
+                <div class="modal-footer">
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    data-bs-dismiss="modal"
+                  >
+                    Close
+                  </button>
+                  <button type="button" class="btn btn-primary">
+                    Save changes
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </span>
+        <span class="add-task">
+          <!-- Button trigger modal -->
+          <button
+            type="button"
+            class="btn btn-primary"
+            data-bs-toggle="modal"
+            data-bs-target="#exampleModal"
+          >
+            Add Task
+          </button>
+
+          <!-- Modal -->
+          <div
+            class="modal fade"
+            id="exampleModal"
+            tabindex="-1"
+            aria-labelledby="exampleModalLabel"
+            aria-hidden="true"
+          >
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h1 class="modal-title fs-5" id="exampleModalLabel">
+                    Modal title
+                  </h1>
+                  <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                  ></button>
+                </div>
+                <div class="modal-body">...</div>
+                <div class="modal-footer">
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    data-bs-dismiss="modal"
+                  >
+                    Close
+                  </button>
+                  <button type="button" class="btn btn-primary">
+                    Save changes
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </span>
+      </span>
+      <!-- Filter -->
+      <span id="filter">
+        <div
+          class="btn-group"
+          role="group"
+          aria-label="Basic mixed styles example"
+        >
+          <button type="button" class="btn btn-danger">All</button>
+          <button type="button" class="btn btn-warning">Pending</button>
+          <button type="button" class="btn btn-success">In Progress</button>
+          <button type="button" class="btn btn-danger">Completed</button>
+        </div>
+      </span>
+    </div>
+    <div class="container-fluid">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>#Row No.</th>
+            <th scope="col">User-Id</th>
+            <th scope="col">Username</th>
+            <th scope="col">Task-Id</th>
+            <th scope="col">Task Title</th>
+            <th scope="col">Status</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">1</th>
+
+            <td>2</td>
+            <td>Ammar</td>
+            <td>4</td>
+            <td>Do Laundrey</td>
+            <td><span class="badge text-bg-primary">In Progress</span></td>
+            <td>
+              <div
+                class="btn-group"
+                role="group"
+                aria-label="Basic mixed styles example"
+              >
+                <button type="button" class="btn btn-danger">Delte</button>
+                <button type="button" class="btn btn-warning">Update</button>
+                <button type="button" class="btn btn-success">View</button>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">1</th>
+            <td>2</td>
+            <td>Ammar</td>
+            <td>4</td>
+            <td>Do Laundrey</td>
+            <td><span class="badge text-bg-danger">Complete</span></td>
+            <td>
+              <div
+                class="btn-group"
+                role="group"
+                aria-label="Basic mixed styles example"
+              >
+                <button type="button" class="btn btn-danger">Delte</button>
+                <button type="button" class="btn btn-warning">Update</button>
+                <button type="button" class="btn btn-success">View</button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <!-- Footer -->
+    <div class="container"></div>
+    <!-- Bootstrap JS -->
+    <script src="/node_modules/bootstrap/dist/js/bootstrap.js"></script>
+    <!-- Custom JS -->
     <script type="module" src="/js/main.js"></script>
   </body>
 </html>
