@@ -1,1 +1,26 @@
-{}
+{
+  "users": [
+    {
+      "username": "Ahmad",
+      "family": "Alharbi",
+      "age": 20,
+      "id": "fK3uZZmGY3g"
+    },
+    {
+      "username": "Braa",
+      "family": "Badawi",
+      "age": 20,
+      "id": "r1wHc4tBVys"
+    }
+  ],
+  "todos": [
+    {
+      "userId": "",
+      "title": "",
+      "description": "",
+      "status": "",
+      "id": "fytsUEHaT-I"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}

@@ -1,6 +1,6 @@
 const baseUrl = "http://localhost:3000";
 // #region Users REST APIs
-const getUsers = async () => {
+export const getUsers = async () => {
   const users = await fetch(baseUrl + "/users").then((response) => {
     return response.json();
   });
@@ -8,14 +8,14 @@ const getUsers = async () => {
   return users;
 };
 
-const getUser = async (id) => {
+export const getUser = async (id) => {
   const user = await fetch(baseUrl + `/users/${id}`).then((response) => {
     return response.json();
   });
   return user;
 };
 
-const addUser = async (userData) => {
+export const addUser = async (userData) => {
   const addedUser = await fetch(baseUrl + "/users", {
     method: "POST",
     headers: {
@@ -26,7 +26,7 @@ const addUser = async (userData) => {
   return addedUser;
 };
 
-const updateUser = async (id, userData) => {
+export const updateUser = async (id, userData) => {
   const updatedUser = await fetch(baseUrl + `/users/${id}`, {
     method: "PUT",
     headers: {
@@ -38,7 +38,7 @@ const updateUser = async (id, userData) => {
   return updatedUser;
 };
 
-const deleteUser = async (id) => {
+export const deleteUser = async (id) => {
   await fetch(baseUrl + `/users/${id}`, {
     method: "DELETE",
   });
@@ -47,7 +47,7 @@ const deleteUser = async (id) => {
 // #endregion
 // #region Tasks REST APIs
 
-const getTasks = async () => {
+export const getTasks = async () => {
   const tasks = await fetch(baseUrl + "/todos").then((response) => {
     return response.json();
   });
@@ -55,14 +55,14 @@ const getTasks = async () => {
   return tasks;
 };
 
-const getTask = async (id) => {
+export const getTask = async (id) => {
   const task = await fetch(baseUrl + `/todos/${id}`).then((response) => {
     return response.json();
   });
   return task;
 };
 
-const addTask = async (taskData) => {
+export const addTask = async (taskData) => {
   const addedTask = await fetch(baseUrl + "/todos", {
     method: "POST",
     headers: {
@@ -73,7 +73,7 @@ const addTask = async (taskData) => {
   return addedTask;
 };
 
-const updateTask = async (id, taskData) => {
+export const updateTask = async (id, taskData) => {
   const updatedTask = await fetch(baseUrl + `/todos/${id}`, {
     method: "PUT",
     headers: {
@@ -85,7 +85,7 @@ const updateTask = async (id, taskData) => {
   return updatedTask;
 };
 
-const deleteTask = async (id) => {
+export const deleteTask = async (id) => {
   await fetch(baseUrl + `/todos/${id}`, {
     method: "DELETE",
   });
