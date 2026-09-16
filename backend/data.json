@@ -15,11 +15,11 @@
   ],
   "todos": [
     {
-      "userId": "",
-      "title": "",
-      "description": "",
-      "status": "",
-      "id": "fytsUEHaT-I"
+      "userId": "fK3uZZmGY3g",
+      "status": "In-Progress",
+      "title": "asd",
+      "description": "asdasdasd",
+      "id": "9MXN0pC56tQ"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

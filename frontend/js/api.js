@@ -45,8 +45,8 @@ export const deleteUser = async (id) => {
 };
 
 // #endregion
-// #region Tasks REST APIs
 
+// #region Tasks REST APIs
 export const getTasks = async () => {
   const tasks = await fetch(baseUrl + "/todos").then((response) => {
     return response.json();
@@ -63,14 +63,21 @@ export const getTask = async (id) => {
 };
 
 export const addTask = async (taskData) => {
-  const addedTask = await fetch(baseUrl + "/todos", {
-    method: "POST",
-    headers: {
-      "content-Type": "application/json",
-    },
-    body: JSON.stringify(taskData),
-  }).then((response) => response.json());
-  return addedTask;
+  try {
+    const response = await fetch(baseUrl + "/todos", {
+      method: "POST",
+      headers: {
+        "content-Type": "application/json",
+      },
+      body: JSON.stringify(taskData),
+    });
+    if (!response.ok) {
+      throw new Error("API ERROR: NOT SERVER ERROR");
+    }
+    return response.json();
+  } catch (error) {
+    console.log("SERVER ERROR", error);
+  }
 };
 
 export const updateTask = async (id, taskData) => {
@@ -90,3 +97,4 @@ export const deleteTask = async (id) => {
     method: "DELETE",
   });
 };
+// #endregion

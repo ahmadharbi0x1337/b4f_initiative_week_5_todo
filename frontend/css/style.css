@@ -1,3 +1,6 @@
+#task-form {
+  padding: 25px;
+}
 #operations {
   display: flex;
   flex-direction: row;
