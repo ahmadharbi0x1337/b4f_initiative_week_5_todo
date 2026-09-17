@@ -1,25 +1,78 @@
 {
   "users": [
     {
-      "username": "Ahmad",
-      "family": "Alharbi",
-      "age": 20,
-      "id": "fK3uZZmGY3g"
+      "firstName": "Yousef",
+      "lastName": "Bakr",
+      "age": "22",
+      "id": "dQfzYNkpPpk"
     },
     {
-      "username": "Braa",
-      "family": "Badawi",
-      "age": 20,
-      "id": "r1wHc4tBVys"
+      "firstName": "Ahmad",
+      "lastName": "Harbi",
+      "age": "24",
+      "id": "ZRWD_384vmA"
+    },
+    {
+      "firstName": "Rami",
+      "lastName": "Shibli",
+      "age": "24",
+      "id": "Xri3BfllNig"
+    },
+    {
+      "firstName": "Alharith",
+      "lastName": "Mayasa",
+      "age": "20",
+      "id": "xaK9dUHLu_c"
+    },
+    {
+      "firstName": "sdfgs",
+      "lastName": "gsfdg",
+      "age": "435",
+      "id": "y8X0pxqlLBQ"
     }
   ],
   "todos": [
     {
-      "userId": "fK3uZZmGY3g",
-      "status": "In-Progress",
+      "userId": "Xri3BfllNig",
+      "status": "pending",
       "title": "asd",
+      "description": "asdasdas",
+      "id": "4Vc_iZiky9o"
+    },
+    {
+      "userId": "xaK9dUHLu_c",
+      "status": "pending",
+      "title": "asdasd",
+      "description": "asdasd",
+      "id": "AgZQclc7f0A"
+    },
+    {
+      "userId": "ZRWD_384vmA",
+      "status": "pending",
+      "title": "asd",
+      "description": "asdasdas",
+      "id": "CsSbxD6OjLc"
+    },
+    {
+      "userId": "ZRWD_384vmA",
+      "status": "pending",
+      "title": "defg",
+      "description": "xfgfghgfh",
+      "id": "2LdV_evGd4s"
+    },
+    {
+      "userId": "Xri3BfllNig",
+      "status": "pending",
+      "title": "asdasda",
       "description": "asdasdasd",
-      "id": "9MXN0pC56tQ"
+      "id": "JLx3KdsTkDU"
+    },
+    {
+      "userId": "ZRWD_384vmA",
+      "status": "pending",
+      "title": "asdasd",
+      "description": "asdasdas",
+      "id": "fLPuMVxqPbI"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

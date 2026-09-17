@@ -56,7 +56,7 @@
             type="button"
             class="btn btn-primary"
             data-bs-toggle="modal"
-            data-bs-target="#exampleModal"
+            data-bs-target="#task-modal"
           >
             Add Task
           </button>
@@ -64,17 +64,15 @@
         <!-- Modal -->
         <div
           class="modal fade"
-          id="exampleModal"
+          id="task-modal"
           tabindex="-1"
-          aria-labelledby="exampleModalLabel"
+          aria-labelledby="task-modal-Label"
           aria-hidden="true"
         >
           <div class="modal-dialog">
             <div class="modal-content">
               <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">
-                  Add Task
-                </h1>
+                <h1 class="modal-title fs-5" id="task-modal-Label">Add Task</h1>
                 <button
                   type="button"
                   class="btn-close"
@@ -89,33 +87,33 @@
                 class="needs-validation"
                 novalidate
               >
-                <!-- User -->
-                <div class="input-group mb-3">
-                  <input
-                    type="text"
-                    class="form-control"
-                    aria-label="Text input with dropdown button"
-                    id="user-input"
-                    required
-                  />
-
-                  <button
-                    class="btn btn-outline-secondary dropdown-toggle"
-                    type="button"
-                    data-bs-toggle="dropdown"
-                    aria-expanded="false"
-                  >
-                    User
-                  </button>
-                  <div class="invalid-feedback">Please select a user.</div>
-                  <div class="valid-feedback">Looks good!</div>
-                  <ul
-                    class="dropdown-menu dropdown-menu-end"
-                    id="ul-users-list"
-                  ></ul>
-                </div>
-                <!-- Title -->
                 <div class="modal-body">
+                  <!-- User -->
+                  <div class="input-group mb-3">
+                    <input
+                      type="text"
+                      class="form-control"
+                      aria-label="Text input with dropdown button"
+                      id="user-input"
+                      required
+                    />
+
+                    <button
+                      class="btn btn-outline-secondary dropdown-toggle"
+                      type="button"
+                      data-bs-toggle="dropdown"
+                      aria-expanded="false"
+                    >
+                      User
+                    </button>
+                    <div class="invalid-feedback">Please select a user.</div>
+                    <div class="valid-feedback">Looks good!</div>
+                    <ul
+                      class="dropdown-menu dropdown-menu-end"
+                      id="ul-users-list"
+                    ></ul>
+                  </div>
+                  <!-- Title -->
                   <div class="input-group mb-3">
                     <span class="input-group-text" id="basic-addon1"
                       >Title</span
@@ -134,9 +132,7 @@
                       Title must be at least 3 characters long.
                     </div>
                   </div>
-                </div>
-                <!-- Description -->
-                <div class="modal-body">
+                  <!-- Description -->
                   <div class="input-group mb-3">
                     <span class="input-group-text" id="basic-addon1"
                       >Description</span
@@ -157,31 +153,6 @@
                     <div class="valid-feedback">Looks good!</div>
                   </div>
                 </div>
-                <!-- Status -->
-                <div class="input-group mb-3">
-                  <input
-                    type="text"
-                    class="form-control"
-                    aria-label="Text input with dropdown button"
-                    required
-                    id="status-input"
-                  />
-                  <button
-                    class="btn btn-outline-secondary dropdown-toggle"
-                    type="button"
-                    data-bs-toggle="dropdown"
-                    aria-expanded="false"
-                  >
-                    Status (Pending by DEFAULT)
-                  </button>
-                  <div class="invalid-feedback">Please select a status.</div>
-                  <div class="valid-feedback">Looks good!</div>
-                  <ul class="dropdown-menu dropdown-menu-end" id="status-list">
-                    <li><a class="dropdown-item" href="#">Pending</a></li>
-                    <li><a class="dropdown-item" href="#">In-Progress</a></li>
-                    <li><a class="dropdown-item" href="#">Completed</a></li>
-                  </ul>
-                </div>
                 <!-- Buttons -->
                 <div class="modal-footer">
                   <button
@@ -195,7 +166,6 @@
                     type="submit"
                     class="btn btn-primary"
                     value="Save Task"
-                    id="submit-task"
                   />
                 </div>
               </form>
@@ -220,14 +190,11 @@
       </div>
     </div>
     <!-- Table -->
-    <div class="container-fluid">
+    <!-- <div class="container-fluid">
       <table class="table">
         <thead>
           <tr>
-            <th>#Row No.</th>
-            <th scope="col">User-Id</th>
             <th scope="col">Username</th>
-            <th scope="col">Task-Id</th>
             <th scope="col">Task Title</th>
             <th scope="col">Status</th>
             <th scope="col">Actions</th>
@@ -235,11 +202,7 @@
         </thead>
         <tbody>
           <tr>
-            <th scope="row">1</th>
-
-            <td>2</td>
             <td>Ammar</td>
-            <td>4</td>
             <td>Do Laundrey</td>
             <td><span class="badge text-bg-primary">In Progress</span></td>
             <td>
@@ -248,26 +211,7 @@
                 role="group"
                 aria-label="Basic mixed styles example"
               >
-                <button type="button" class="btn btn-danger">Delte</button>
-                <button type="button" class="btn btn-warning">Update</button>
-                <button type="button" class="btn btn-success">View</button>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <th scope="row">1</th>
-            <td>2</td>
-            <td>Ammar</td>
-            <td>4</td>
-            <td>Do Laundrey</td>
-            <td><span class="badge text-bg-danger">Complete</span></td>
-            <td>
-              <div
-                class="btn-group"
-                role="group"
-                aria-label="Basic mixed styles example"
-              >
-                <button type="button" class="btn btn-danger">Delte</button>
+                <button type="button" class="btn btn-danger">Delete</button>
                 <button type="button" class="btn btn-warning">Update</button>
                 <button type="button" class="btn btn-success">View</button>
               </div>
@@ -275,7 +219,8 @@
           </tr>
         </tbody>
       </table>
-    </div>
+    </div> -->
+    <table id="table"></table>
     <!-- Footer -->
     <div class="container"></div>
     <!-- Bootstrap JS -->

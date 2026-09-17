@@ -22,13 +22,17 @@ export const addUser = async (userData) => {
       "content-Type": "application/json",
     },
     body: JSON.stringify(userData),
-  }).then((response) => response.json());
+  })
+    .then((response) => response.json())
+    .catch((e) => {
+      console.error(e);
+    });
   return addedUser;
 };
 
 export const updateUser = async (id, userData) => {
   const updatedUser = await fetch(baseUrl + `/users/${id}`, {
-    method: "PUT",
+    method: "PATCH", //  PUT is Complete Replacement (Copies and Compares) , Where as PATCH is Partial Only Adds Updated Data
     headers: {
       "Content-Type": "application/json",
     },
@@ -97,4 +101,6 @@ export const deleteTask = async (id) => {
     method: "DELETE",
   });
 };
+
+
 // #endregion
