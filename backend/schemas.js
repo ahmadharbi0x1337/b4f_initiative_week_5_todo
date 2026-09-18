@@ -1,8 +1,9 @@
 // const userSchema = {
 //   id: "string",
-//   userName: "string",
-//   family: "string",
+//   firstName: "string",
+//   lastName: "string",
 //   age: "number",
+//   actions: "object | string | Enum"
 // };
 
 // const taskSchema = {
@@ -10,5 +11,6 @@
 //   userId: "string",
 //   title: "string",
 //   description: "string",
-//   status: "string | Enum",
+//   status: "object | string | Enum",
+//   actions: "object | string | Enum"
 // };

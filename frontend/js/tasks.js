@@ -1,17 +1,30 @@
-import { getUsers, getUser, addTask, getTasks } from "/js/api.js";
+import { getUsers, getUser, addTask, getAllTasks } from "/js/api.js";
 import { renderTable } from "./tableBuilder.js";
+import { CustomBtn } from "./utils.js";
+
+const actions = (idx) => {
+  return {
+    update: CustomBtn("Update", `${idx}`, "btn-success", "UPDATE"), // Only Updates Status (Linearly Each Step At Time Compolsary)
+    delete: CustomBtn("Delete", `${idx}`, "btn-danger", "DELETE"), // Deletes a Task
+    view: CustomBtn("View", `${idx}`, "btn-primary", "VIEW"), // View Details (Like Description, Full List of Assigned Users)
+  };
+};
 
 const modifyTasks = async () => {
-  const tasks = await getTasks();
+  const tasks = await getAllTasks();
+  // Note: we used Promise.all() because map returns an array of Promises, and one of the ways to resolve this issue was to rap the array of promises in Promise.all
+  // Promise.all()  returns an array of the fulfillment values
+  // try to unwrap it and see what the console.log(modifiedTasks) will be [promise <fulfill>]
   const modifiedTasks = await Promise.all(
-    tasks.map(async (task) => {
+    tasks.map(async (task, idx) => {
       const user = await getUser(task["userId"]);
-      const userName = user["firstName"] + user["lastName"];
-      console.log(userName);
+      const userName = user["firstName"] + " " + user["lastName"];
+      // console.log(userName); // if the keys don't exist the output will be "NaN"
       return {
         username: userName,
         title: task["title"],
         status: task["status"],
+        actions: actions(idx),
       };
     }),
   );
@@ -19,12 +32,14 @@ const modifyTasks = async () => {
 };
 
 const renderTasksTable = async () => {
-  renderTable("table", await modifyTasks());
+  const tasks = await modifyTasks();
+  renderTable("table", tasks);
 };
 
 export const initTasks = async () => {
   await renderTasksTable();
   // Form
+
   const taskForm = document.getElementById("task-form");
   // Form Input Fields
   // #region
@@ -43,6 +58,7 @@ export const initTasks = async () => {
   // const submitBtn = document.getElementById("submit-task");
 
   // #endregion
+
   // Handlers
   // #region
   // -- // Users Dropdown
@@ -92,9 +108,10 @@ export const initTasks = async () => {
     if (modalInstance) {
       modalInstance.hide();
     }
-    await renderTasksTable();
+    await renderTasksTable(); // need to create an update method rather than rendering the whole table
   });
 
   // #endregion
-  // Render/Add Task To Table
 };
+
+export const viewTask = (task) => {};

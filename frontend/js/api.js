@@ -30,17 +30,17 @@ export const addUser = async (userData) => {
   return addedUser;
 };
 
-export const updateUser = async (id, userData) => {
-  const updatedUser = await fetch(baseUrl + `/users/${id}`, {
-    method: "PATCH", //  PUT is Complete Replacement (Copies and Compares) , Where as PATCH is Partial Only Adds Updated Data
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(userData),
-  }).then((response) => response.json());
+// export const updateUser = async (id, userData) => {
+//   const updatedUser = await fetch(baseUrl + `/users/${id}`, {
+//     method: "PATCH", //  PUT is Complete Replacement (Copies and Compares) , Where as PATCH is Partial Only Adds Updated Data
+//     headers: {
+//       "Content-Type": "application/json",
+//     },
+//     body: JSON.stringify(userData),
+//   }).then((response) => response.json());
 
-  return updatedUser;
-};
+//   return updatedUser;
+// };
 
 export const deleteUser = async (id) => {
   await fetch(baseUrl + `/users/${id}`, {
@@ -51,7 +51,7 @@ export const deleteUser = async (id) => {
 // #endregion
 
 // #region Tasks REST APIs
-export const getTasks = async () => {
+export const getAllTasks = async () => {
   const tasks = await fetch(baseUrl + "/todos").then((response) => {
     return response.json();
   });
@@ -86,7 +86,7 @@ export const addTask = async (taskData) => {
 
 export const updateTask = async (id, taskData) => {
   const updatedTask = await fetch(baseUrl + `/todos/${id}`, {
-    method: "PUT",
+    method: "PATCH",
     headers: {
       "Content-Type": "application/json",
     },
@@ -102,5 +102,69 @@ export const deleteTask = async (id) => {
   });
 };
 
+// #endregion
 
+// FOR REFACTORING LATER (Centralized Error Handling, and Factory Pattern)
+// NOTE: Error Handling Requires Knowing How The Backend Will Respond To Different Failure Cases
+// #region Refactoring
+// // --- Centralized Error Handler ---
+// class ApiError extends Error {
+//   constructor(message, status, data) {
+//     super(message);
+//     this.name = "ApiError";
+//     this.status = status;
+//     this.data = data;
+//   }
+// }
+
+// // --- Core Client Function ---
+// const request = async (endpoint, options = {}) => {
+//   const config = {
+//     headers: {
+//       "Content-Type": "application/json",
+//       ...options.headers,
+//     },
+//     ...options,
+//   };
+
+//   if (config.body && typeof config.body !== "string") {
+//     config.body = JSON.stringify(config.body);
+//   }
+
+//   try {
+//     const response = await fetch(`${BASE_URL}${endpoint}`, config);
+
+//     // Parse response body safely
+//     const data =
+//       response.status !== 204 ? await response.json().catch(() => null) : null;
+
+//     if (!response.ok) {
+//       throw new ApiError(
+//         data?.message || `HTTP Error ${response.status}`,
+//         response.status,
+//         data,
+//       );
+//     }
+
+//     return data;
+//   } catch (error) {
+//     // Re-throw custom API errors or network failures so calling UI code can react appropriately
+//     if (error instanceof ApiError) throw error;
+//     throw new ApiError(error.message || "Network failure", 0, null);
+//   }
+// };
+
+// // --- CRUD Factory Creator ---
+// const createCrudService = (endpoint) => ({
+//   getAll: () => request(endpoint),
+//   getById: (id) => request(`${endpoint}/${id}`),
+//   create: (data) => request(endpoint, { method: "POST", body: data }),
+//   update: (id, data) =>
+//     request(`${endpoint}/${id}`, { method: "PATCH", body: data }),
+//   delete: (id) => request(`${endpoint}/${id}`, { method: "DELETE" }),
+// });
+
+// // --- Exported API Services ---
+// export const usersApi = createCrudService("/users");
+// export const tasksApi = createCrudService("/todos");
 // #endregion

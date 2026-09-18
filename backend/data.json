@@ -1,78 +1,75 @@
 {
   "users": [
     {
-      "firstName": "Yousef",
-      "lastName": "Bakr",
-      "age": "22",
-      "id": "dQfzYNkpPpk"
+      "firstName": "Ammar",
+      "lastName": "Farha",
+      "age": "25",
+      "id": "YdohQ_hyrgE"
     },
     {
       "firstName": "Ahmad",
-      "lastName": "Harbi",
+      "lastName": "Alharbi",
       "age": "24",
-      "id": "ZRWD_384vmA"
+      "id": "wV9f0JNjb2w"
+    },
+    {
+      "firstName": "Yousef",
+      "lastName": "Bakr",
+      "age": "21",
+      "id": "xVhWjXfw2lE"
     },
     {
       "firstName": "Rami",
       "lastName": "Shibli",
       "age": "24",
-      "id": "Xri3BfllNig"
+      "id": "fmuN6Vp47m4"
+    },
+    {
+      "firstName": "Jamal",
+      "lastName": "Aldahak",
+      "age": "26",
+      "id": "A0XB3F85n_k"
     },
     {
       "firstName": "Alharith",
       "lastName": "Mayasa",
       "age": "20",
-      "id": "xaK9dUHLu_c"
+      "id": "QXvBXOqg2wk"
     },
     {
-      "firstName": "sdfgs",
-      "lastName": "gsfdg",
-      "age": "435",
-      "id": "y8X0pxqlLBQ"
+      "firstName": "Majd",
+      "lastName": "Kamas",
+      "age": "20",
+      "id": "IlPoEInoKtw"
+    },
+    {
+      "firstName": "Mowafak",
+      "lastName": "Arida",
+      "age": "20",
+      "id": "O31RuIJdZps"
     }
   ],
   "todos": [
     {
-      "userId": "Xri3BfllNig",
-      "status": "pending",
-      "title": "asd",
-      "description": "asdasdas",
-      "id": "4Vc_iZiky9o"
+      "userId": "wV9f0JNjb2w",
+      "status": "completed",
+      "title": "Back-end Development",
+      "description": "Implement an Auth System",
+      "id": "ZrBY0WFTrW4"
     },
     {
-      "userId": "xaK9dUHLu_c",
-      "status": "pending",
-      "title": "asdasd",
-      "description": "asdasd",
-      "id": "AgZQclc7f0A"
+      "userId": "xVhWjXfw2lE",
+      "status": "in-progress",
+      "title": "Back-end Development",
+      "description": "Implement CRUD Services",
+      "id": "ULRkJ-seRSg"
     },
     {
-      "userId": "ZRWD_384vmA",
+      "userId": "fmuN6Vp47m4",
       "status": "pending",
-      "title": "asd",
-      "description": "asdasdas",
-      "id": "CsSbxD6OjLc"
-    },
-    {
-      "userId": "ZRWD_384vmA",
-      "status": "pending",
-      "title": "defg",
-      "description": "xfgfghgfh",
-      "id": "2LdV_evGd4s"
-    },
-    {
-      "userId": "Xri3BfllNig",
-      "status": "pending",
-      "title": "asdasda",
-      "description": "asdasdasd",
-      "id": "JLx3KdsTkDU"
-    },
-    {
-      "userId": "ZRWD_384vmA",
-      "status": "pending",
-      "title": "asdasd",
-      "description": "asdasdas",
-      "id": "fLPuMVxqPbI"
+      "title": "Front-End Development",
+      "description": "Implement Figma Prototype",
+      "id": "jvvmzSqfcWw"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

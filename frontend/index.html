@@ -20,7 +20,7 @@
     <!-- Header -->
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
       <div class="container-fluid">
-        <a class="navbar-brand" href="#">Navbar</a>
+        <a class="navbar-brand" href="/">Navbar</a>
         <button
           class="navbar-toggler"
           type="button"
@@ -35,7 +35,7 @@
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#">Home</a>
+              <a class="nav-link active" aria-current="page" href="/">Home</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="/users.html">Users</a>
@@ -44,14 +44,13 @@
         </div>
       </div>
     </nav>
-
     <!-- Main -->
     <div class="container-fluid" id="operations">
-      <!-- Add Task  -->
       <div class="row justify-content-between">
         <!-- Button trigger modal -->
 
         <div class="col-6">
+          <!-- Add Task  -->
           <button
             type="button"
             class="btn btn-primary"
@@ -91,6 +90,7 @@
                   <!-- User -->
                   <div class="input-group mb-3">
                     <input
+                      name="userId"
                       type="text"
                       class="form-control"
                       aria-label="Text input with dropdown button"
@@ -120,6 +120,7 @@
                     >
                     <input
                       type="text"
+                      name="title"
                       class="form-control"
                       placeholder="Title"
                       aria-label="Title"
@@ -139,6 +140,7 @@
                     >
                     <input
                       type="text"
+                      name="description"
                       class="form-control"
                       placeholder="Description"
                       aria-label="Description"
@@ -172,54 +174,12 @@
             </div>
           </div>
         </div>
-        <div class="col-6">
-          <!-- Filter -->
-          <span id="filter">
-            <div
-              class="btn-group"
-              role="group"
-              aria-label="Basic mixed styles example"
-            >
-              <button type="button" class="btn btn-danger">All</button>
-              <button type="button" class="btn btn-warning">Pending</button>
-              <button type="button" class="btn btn-success">In Progress</button>
-              <button type="button" class="btn btn-danger">Completed</button>
-            </div>
-          </span>
+        <div class="col-6" id="status-filter">
+        
         </div>
       </div>
     </div>
     <!-- Table -->
-    <!-- <div class="container-fluid">
-      <table class="table">
-        <thead>
-          <tr>
-            <th scope="col">Username</th>
-            <th scope="col">Task Title</th>
-            <th scope="col">Status</th>
-            <th scope="col">Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Ammar</td>
-            <td>Do Laundrey</td>
-            <td><span class="badge text-bg-primary">In Progress</span></td>
-            <td>
-              <div
-                class="btn-group"
-                role="group"
-                aria-label="Basic mixed styles example"
-              >
-                <button type="button" class="btn btn-danger">Delete</button>
-                <button type="button" class="btn btn-warning">Update</button>
-                <button type="button" class="btn btn-success">View</button>
-              </div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div> -->
     <table id="table"></table>
     <!-- Footer -->
     <div class="container"></div>
