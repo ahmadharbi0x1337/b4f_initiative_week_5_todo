@@ -1,28 +1,49 @@
-import { getUsers, addUser } from "/js/api.js";
+// imports
+import { usersApi } from "./api.js";
 import { CustomBtn, getFormData, hideBSModal } from "./utils.js";
 import { renderTable } from "./tableBuilder.js";
-const actions = (idx) => {
+import { refreshUsers, state } from "./storage.js";
+
+const userActions = (idx) => {
   return {
-    delete: CustomBtn("Delete", `delete-btn-${idx}`, "btn-danger"),
+    delete: CustomBtn("Delete", `${idx}`, "btn-danger"),
   };
 };
 
 const modifyUsers = async () => {
-  const users = await getUsers();
-  const modifiedUsers = users.map((user, idx) => {
+  await refreshUsers();
+  const modified = state.users.map((user) => {
     return {
-      "First Name": user["firstName"],
-      "Last Name": user["lastName"],
-      Age: user["age"],
-      actions: actions(idx),
+      "first-name": user["firstName"],
+      "last-name": user["lastName"],
+      age: user["age"],
+      actions: userActions(user["id"]),
     };
   });
-  return modifiedUsers;
+  return modified;
 };
+export const userCrud = async (pointerEvent = PointerEvent) => {
+  await refreshUsers();
+  const action = pointerEvent.target.getAttribute("data-action");
+  const id = pointerEvent.target.getAttribute("id");
+  // wrapped in String because of trailing or starting numbers especailly zeros may cause errors
+  const user = state.users.find((user) => String(user["id"]) == String(id));
 
+  switch (action) {
+    case "UPDATE":
+      // update user
+      return;
+    case "DELETE":
+      await usersApi.delete(user["id"]);
+      await renderUsersTable();
+      return;
+    default:
+      return "DEFAULT";
+  }
+};
 const renderUsersTable = async () => {
   const modifiedUsers = await modifyUsers();
-  renderTable("table", modifiedUsers);
+  renderTable("table", modifiedUsers, userCrud);
 };
 
 export const initUsers = async () => {
@@ -30,19 +51,6 @@ export const initUsers = async () => {
   // Form
   const userForm = document.getElementById("user-form");
 
-  // #region OLD CODE
-  // Form Input Fields
-  // -- // Users Info
-
-  // const userFormInputs = {
-  //   firstName: "first-name-input",
-  //   lastName: "last-name-input",
-  //   age: "age-input",
-  // };
-  // const userFirstName = document.getElementById("first-name-input");
-  // const userLastName = document.getElementById("last-name-input");
-  // const userAge = document.getElementById("age-input");
-  // #endregion
   userForm.addEventListener("submit", async (e) => {
     e.preventDefault();
     // validate
@@ -50,18 +58,10 @@ export const initUsers = async () => {
     if (!userForm.checkValidity()) {
       return;
     }
-    // #region OLD CODE
-    // create object
-    // const userData = {
-    //   firstName: userFirstName.value,
-    //   lastName: userLastName.value,
-    //   age: userAge.value,
-    // };
-    //  #endregion
 
     const userData = getFormData(userForm);
 
-    const res = await addUser(userData);
+    const res = await usersApi.create(userData);
     if (res) {
       // Native method to clear fields , bust be called on the Form Element, Not on an individual input elements (will result to error)
       userForm.reset();

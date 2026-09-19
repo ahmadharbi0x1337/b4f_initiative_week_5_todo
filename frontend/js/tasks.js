@@ -1,45 +1,133 @@
-import { getUsers, getUser, addTask, getAllTasks } from "/js/api.js";
+import { tasksApi } from ".//api.js";
 import { renderTable } from "./tableBuilder.js";
-import { CustomBtn } from "./utils.js";
+import { CustomBtn, hideBSModal } from "./utils.js";
+import { state, refreshState, refreshTasks, refreshUsers } from "./storage.js";
+// Globals
 
-const actions = (idx) => {
+const taskActions = (idx) => {
   return {
-    update: CustomBtn("Update", `${idx}`, "btn-success", "UPDATE"), // Only Updates Status (Linearly Each Step At Time Compolsary)
-    delete: CustomBtn("Delete", `${idx}`, "btn-danger", "DELETE"), // Deletes a Task
-    view: CustomBtn("View", `${idx}`, "btn-primary", "VIEW"), // View Details (Like Description, Full List of Assigned Users)
+    update: CustomBtn("Update", `${idx}`, "btn-success"), // Only Updates Status (Linearly Each Step At Time Compolsary)
+    delete: CustomBtn("Delete", `${idx}`, "btn-danger"),
+    view: CustomBtn(
+      "View",
+      `${idx}`,
+      "btn-primary",
+      `"data-bs-toggle="modal" data-bs-target="#view-task-modal"`,
+    ), // View Details (Like Description, Full List of Assigned Users)
   };
 };
 
 const modifyTasks = async () => {
-  const tasks = await getAllTasks();
+  await refreshState();
+  const modified = state.tasks.map((task) => {
+    const user = state.users.find(
+      (user) => String(user["id"]) == String(task["userId"]),
+    );
+    return {
+      username: `${user["firstName"]} ${user["lastName"]}`,
+      title: task["title"],
+      status: task["status"],
+      actions: taskActions(task["id"]),
+    };
+  });
+  // #region
+  // OLD CODE BUT HELPFUL FOR FUTURE , ESPECIALLY REGARDING THE Promise.all() and The Note About Network Requests
+  // THIS WILL MAKE N+1 Network HTTP Requests, Essentially CAUSING a DDOS ATTACK, HOW CUTE!
   // Note: we used Promise.all() because map returns an array of Promises, and one of the ways to resolve this issue was to rap the array of promises in Promise.all
   // Promise.all()  returns an array of the fulfillment values
   // try to unwrap it and see what the console.log(modifiedTasks) will be [promise <fulfill>]
-  const modifiedTasks = await Promise.all(
-    tasks.map(async (task, idx) => {
-      const user = await getUser(task["userId"]);
-      const userName = user["firstName"] + " " + user["lastName"];
-      // console.log(userName); // if the keys don't exist the output will be "NaN"
-      return {
-        username: userName,
-        title: task["title"],
-        status: task["status"],
-        actions: actions(idx),
-      };
-    }),
-  );
-  return modifiedTasks;
+  // const modifiedTasks = await Promise.all(
+  //     const user = await usersApi.getById(task["userId"]);
+  //     const userName = user["firstName"] + " " + user["lastName"];
+  //     // console.log(userName); // if the keys don't exist the output will be "NaN"
+  //     return {
+  //       username: userName,
+  //       title: task["title"],
+  //       status: task["status"],
+  // wrong invocation, you can't name a key like a function
+  //       actions: actions(idx),
+  //     };
+  // #endregion
+  return modified;
+};
+const viewTask = (task) => {
+  const viewTaskModal = document.getElementById("view-task-modal");
+  viewTaskModal.querySelector("h1").innerHTML = task["title"].toUpperCase();
+  console.log(task);
+  const modalBody = viewTaskModal.querySelector(".modal-body");
+  modalBody.innerHTML = "";
+  modalBody.innerHTML = `
+  <div class="vstack gap-2 bg-light">
+    <div class="p-2">
+      <div class="input-group mb-3">
+        <p class="container-fluid text-bg-primary p-1">Description</p>
+        <p class="container-fluid p-1 text-bg-dark">${task["description"]}</p>
+      </div>
+    </div>
+    <div class="p-2"> 
+      <div class="input-group mb-3">
+        <p class="container-fluid text-bg-success p-1">Status</p>
+        <p class="container-fluid p-1 text-bg-secondary">${task["status"]}</p>
+      </div>
+    </div>
+    <div class="p-2">
+      <div class="input-group mb-3">
+        <p class="container-fluid text-bg-danger p-1">Assigned To</p>
+        <p class="container-fluid p-1 text-bg-info">USERS</p>
+      </div>
+    </div>
+  </div>
+  `;
+  // Show Modal After Inserting Data
+  const modalInstance = bootstrap.Modal.getOrCreateInstance(viewTaskModal);
+  modalInstance.show();
+};
+
+const taskCrud = async (pointerEvent = PointerEvent) => {
+  await refreshTasks();
+  const action = pointerEvent.target.getAttribute("data-action");
+  const id = pointerEvent.target.getAttribute("id");
+  const task = state.tasks.find((task) => String(task["id"]) == String(id));
+  switch (action) {
+    case "UPDATE":
+      if (task["status"] == "pending") {
+        task["status"] = "in-progress";
+        await tasksApi.update(task["id"], task);
+        await renderTasksTable();
+        return;
+      } else if (task["status"] == "in-progress") {
+        task["status"] = "completed";
+        await tasksApi.update(task["id"], task);
+        await renderTasksTable();
+        return;
+      } else {
+        console.log(
+          "Completed Is The Final Stage of A Task, You May Delete It If You Want",
+        );
+        return;
+      }
+
+    case "DELETE":
+      await tasksApi.delete(task["id"]);
+      await renderTasksTable();
+      return;
+
+    case "VIEW":
+      viewTask(task);
+      return;
+    default:
+      return "DEFAULT";
+  }
 };
 
 const renderTasksTable = async () => {
   const tasks = await modifyTasks();
-  renderTable("table", tasks);
+  renderTable("table", tasks, taskCrud);
 };
 
 export const initTasks = async () => {
   await renderTasksTable();
   // Form
-
   const taskForm = document.getElementById("task-form");
   // Form Input Fields
   // #region
@@ -63,8 +151,8 @@ export const initTasks = async () => {
   // #region
   // -- // Users Dropdown
   const handleAddUsersToListAndSelect = async () => {
-    const users = await getUsers();
-    users.map((user) => {
+    await refreshUsers();
+    state.users.forEach((user) => {
       const listItem = document.createElement("li");
       const anchorItem = document.createElement("a");
       const fullName = user["firstName"] + " " + user["lastName"];
@@ -94,24 +182,14 @@ export const initTasks = async () => {
       title: titleInput.value,
       description: descriptionInput.value,
     };
-
-    userInput.setAttribute("id-value", "");
-    userInput.value = "";
-    titleInput.value = "";
-    descriptionInput.value = "";
-    taskForm.classList.remove("was-validated");
-
-    const res = await addTask(taskData);
-    // console.log(res);
-    const taskModal = document.getElementById("task-modal");
-    const modalInstance = bootstrap.Modal.getInstance(taskModal);
-    if (modalInstance) {
-      modalInstance.hide();
+    taskForm.reset();
+    const res = await tasksApi.create(taskData);
+    if (res) {
+      taskForm.classList.remove("was-validated");
+      hideBSModal("task-modal");
+      await renderTasksTable(); // need to create an update method rather than rendering the whole table
     }
-    await renderTasksTable(); // need to create an update method rather than rendering the whole table
   });
 
   // #endregion
 };
-
-export const viewTask = (task) => {};

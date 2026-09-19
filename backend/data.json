@@ -4,72 +4,42 @@
       "firstName": "Ammar",
       "lastName": "Farha",
       "age": "25",
-      "id": "YdohQ_hyrgE"
+      "id": "cqTV6pzJwWY"
     },
     {
       "firstName": "Ahmad",
       "lastName": "Alharbi",
       "age": "24",
-      "id": "wV9f0JNjb2w"
+      "id": "N1COC3jQegs"
     },
     {
       "firstName": "Yousef",
       "lastName": "Bakr",
       "age": "21",
-      "id": "xVhWjXfw2lE"
-    },
-    {
-      "firstName": "Rami",
-      "lastName": "Shibli",
-      "age": "24",
-      "id": "fmuN6Vp47m4"
-    },
-    {
-      "firstName": "Jamal",
-      "lastName": "Aldahak",
-      "age": "26",
-      "id": "A0XB3F85n_k"
-    },
-    {
-      "firstName": "Alharith",
-      "lastName": "Mayasa",
-      "age": "20",
-      "id": "QXvBXOqg2wk"
-    },
-    {
-      "firstName": "Majd",
-      "lastName": "Kamas",
-      "age": "20",
-      "id": "IlPoEInoKtw"
-    },
-    {
-      "firstName": "Mowafak",
-      "lastName": "Arida",
-      "age": "20",
-      "id": "O31RuIJdZps"
+      "id": "udyspcRQlYo"
     }
   ],
   "todos": [
     {
-      "userId": "wV9f0JNjb2w",
+      "userId": "cqTV6pzJwWY",
       "status": "completed",
-      "title": "Back-end Development",
-      "description": "Implement an Auth System",
-      "id": "ZrBY0WFTrW4"
+      "title": "Head Of The Table",
+      "description": "Enjoys Torturing People",
+      "id": "cRlKCg8SMSg"
     },
     {
-      "userId": "xVhWjXfw2lE",
+      "userId": "N1COC3jQegs",
       "status": "in-progress",
-      "title": "Back-end Development",
-      "description": "Implement CRUD Services",
-      "id": "ULRkJ-seRSg"
+      "title": "Back-end",
+      "description": "Implement Tasks Services",
+      "id": "AFI-H8oLC54"
     },
     {
-      "userId": "fmuN6Vp47m4",
+      "userId": "udyspcRQlYo",
       "status": "pending",
-      "title": "Front-End Development",
-      "description": "Implement Figma Prototype",
-      "id": "jvvmzSqfcWw"
+      "title": "Back-end",
+      "description": "Implement User Services",
+      "id": "QrB2_OVklfA"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

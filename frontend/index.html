@@ -96,6 +96,7 @@
                       aria-label="Text input with dropdown button"
                       id="user-input"
                       required
+                      readonly
                     />
 
                     <button
@@ -174,13 +175,43 @@
             </div>
           </div>
         </div>
-        <div class="col-6" id="status-filter">
-        
-        </div>
+        <!-- Filter -->
+        <div class="col-6" id="status-filter"></div>
       </div>
     </div>
     <!-- Table -->
-    <table id="table"></table>
+    <div id="table"></div>
+    <!-- View Task Modal -->
+    <div
+      class="modal fade"
+      id="view-task-modal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">...</div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+          </div>
+        </div>
+      </div>
+    </div>
     <!-- Footer -->
     <div class="container"></div>
     <!-- Bootstrap JS -->

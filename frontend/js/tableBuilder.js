@@ -1,12 +1,21 @@
 // General Table Builder
 
-import { addListenersToChildren, taskCrud } from "./utils.js";
+import { addListenersToChildren } from "./utils.js";
 
-export const renderTable = (id, data = []) => {
-  // select, init, and clear table (will refactor to create not to select in future)
-  const table = document.getElementById(id);
+export const renderTable = (id, data = [], callBack) => {
+  const parent = document.getElementById(id);
+  // handle empty data gracefully
+  if (data.length == 0) {
+    parent.innerHTML = `
+    <div class="container-fluid">
+    <span class="badge rounded-pill text-bg-warning">No Data Available</span>
+    </div>
+    `;
+    return;
+  }
+  parent.innerHTML = "";
+  const table = document.createElement("table");
   table.classList.add("table");
-  table.innerHTML = "";
   //create table header
   const header = document.createElement("thead");
   const tr = document.createElement("tr");
@@ -15,39 +24,32 @@ export const renderTable = (id, data = []) => {
   // console.log(data[0]); // output: undefined
   // thus throwing the error message :
   // Uncaught (in promise) TypeError: Cannot convert undefined or null to object
-  try {
-    if (data.length == 0) {
-      throw new Error("You Should Provide a Non-Empty Array Please");
-    }
-    Object.keys(data[0]).map((key) => {
-      const th = document.createElement("th");
-      th.innerHTML = key.toUpperCase();
-      tr.append(th);
-    });
-  } catch (err) {
-    console.error(err);
-  }
-
+  Object.keys(data[0]).forEach((key) => {
+    const th = document.createElement("th");
+    th.innerHTML = key.toUpperCase();
+    tr.append(th);
+  });
   header.append(tr);
   table.append(header);
   //create table body
   const body = document.createElement("tbody");
-  data.map((trObj) => {
+  data.forEach((trObj) => {
     // create rows
-    const trs = document.createElement("tr");
+    const tr = document.createElement("tr");
     // extract data
-    Object.values(trObj).map((cellData) => {
+    Object.values(trObj).forEach((cellData) => {
       // created cells and attach data
       const td = document.createElement("td");
       if (cellData === Object(cellData)) {
         td.innerHTML = Object.values(cellData).join("");
-        addListenersToChildren(td, taskCrud);
+        addListenersToChildren(td, callBack);
       } else {
         td.innerHTML = cellData;
       }
-      trs.append(td);
+      tr.append(td);
     });
-    body.append(trs);
+    body.append(tr);
   });
   table.append(body);
+  parent.append(table);
 };
